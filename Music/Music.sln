@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.74
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Music", "Music.vcxproj", "{85CF50FB-B2DC-4A8B-A2AD-CACAC5A95E9D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AFC78F67-375E-43E0-9AEE-5A1CBD0D2148}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{85CF50FB-B2DC-4A8B-A2AD-CACAC5A95E9D}.Debug|x64.ActiveCfg = Debug|x64
+		{85CF50FB-B2DC-4A8B-A2AD-CACAC5A95E9D}.Debug|x64.Build.0 = Debug|x64
+		{85CF50FB-B2DC-4A8B-A2AD-CACAC5A95E9D}.Debug|x86.ActiveCfg = Debug|Win32
+		{85CF50FB-B2DC-4A8B-A2AD-CACAC5A95E9D}.Debug|x86.Build.0 = Debug|Win32
+		{85CF50FB-B2DC-4A8B-A2AD-CACAC5A95E9D}.Release|x64.ActiveCfg = Release|x64
+		{85CF50FB-B2DC-4A8B-A2AD-CACAC5A95E9D}.Release|x64.Build.0 = Release|x64
+		{85CF50FB-B2DC-4A8B-A2AD-CACAC5A95E9D}.Release|x86.ActiveCfg = Release|Win32
+		{85CF50FB-B2DC-4A8B-A2AD-CACAC5A95E9D}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F0EA78A4-4F0F-4BD3-9AFE-88CE993EDB8E}
+	EndGlobalSection
+EndGlobal

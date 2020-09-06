@@ -140,6 +140,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Music.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Music.h" />
+    <ClInclude Include="Static\bitmap.h" />
+    <ClInclude Include="Static\Date.h" />
+    <ClInclude Include="Static\FakeAddress.h" />
+    <ClInclude Include="Static\FakeBDay.h" />
+    <ClInclude Include="Static\FakeEmail.h" />
+    <ClInclude Include="Static\FakeName.h" />
+    <ClInclude Include="Static\FakeTel.h" />
+    <ClInclude Include="Static\Random.h" />
+    <ClInclude Include="Static\Tokenizer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Static\MyStaticLib.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

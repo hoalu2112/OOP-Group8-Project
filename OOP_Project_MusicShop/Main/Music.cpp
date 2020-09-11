@@ -4,9 +4,9 @@
 
 Store::Store() {
 	ifstream fin;
-	fin.open("C:\\Users\\user\\Desktop\\Store.txt");
+	fin.open("..\\..\\Store.txt");
 	if (!fin.is_open()) {
-		cout << "Can not open file." << endl;
+		cout << "Can not open file store." << endl;
 		return;
 	}
 	else {
@@ -33,7 +33,7 @@ Store::Store() {
 
 
 vector<Song> Song::readFile(int id) {
-	string link_album = "C:\\Users\\user\\Desktop\\";
+	string link_album = "..\\..\\Album\\";
 	stringstream ss;
 	ss << link_album << id << "\\Song_" << id << ".txt";
 
@@ -41,7 +41,7 @@ vector<Song> Song::readFile(int id) {
 	ifstream fin;
 	fin.open(ss.str().c_str());
 	if (!fin.is_open()) {
-		cout << "Can not open file" << endl;
+		cout << "Can not open file Song" << endl;
 	}
 	else {
 		int song_numbers;
@@ -94,14 +94,14 @@ void Song::printInfoSong() {
 }
 
 Album::Album(int id) {
-	string link_album = "C:\\Users\\user\\Desktop\\";
+	string link_album = "..\\..\\Album\\";
 	stringstream ss;
 	ss << link_album << id <<"\\Info_" << id << ".txt";
 
 	ifstream fin;
 	fin.open(ss.str().c_str());
 	if (!fin.is_open()) {
-		cout << "Can not open file" << endl;
+		cout << "Can not open file info id" << endl;
 	}
 	else {
 		this->m_id = id;
@@ -213,7 +213,7 @@ void Album::rateAlbum() {
 }
 
 void Album::writeFileInfo() {
-	string link_album = "C:\\Users\\user\\Desktop\\";
+	string link_album = "..\\..\\Album\\";
 	stringstream ss;
 	ss << link_album << this->m_id << "\\Info_" << this->m_id << ".txt";
 
@@ -320,9 +320,9 @@ void printBestRate_Seller(vector<Album> album, Store store){
 
 void makeListOfAlbums(vector<Album>& album) {
 	ifstream fin;
-	fin.open("C:\\Users\\user\\Desktop\\ID_Album.txt");
+	fin.open("..\\..\\Album\\ID_Album.txt");
 	if (!fin.is_open()) {
-		cout << "Can not open file" << endl;
+		cout << "Can not open file album" << endl;
 		return;
 	}
 	else {

@@ -392,9 +392,13 @@ void albumOption(vector<Album> album) {
 
 double Cart::total_price()
 {
-	double result;
+	double result=0;
 	for (int i = 0; i < m_album.size(); i++) {
 		result += m_album[i].Tel_price();
 	}
 	return result;
+}
+
+void Cart::Buy_ALL(const Customer& Current_Cus)
+{
 }

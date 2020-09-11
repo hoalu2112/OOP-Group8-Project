@@ -1,13 +1,13 @@
 #include "Customer.h"
 
 Customer::Customer(string username) {
-	string link_customer = "C:\\Users\\user\\Desktop\\All_Users\\";
+	string link_customer = "All_Users\\";
 	stringstream ss;
 	ss << link_customer << username << ".txt";
 	ifstream fin;
 	fin.open(ss.str().c_str());
 	if (!fin.is_open()) {
-		cout << "Can not open file" << endl;
+		cout << "Can not open file\\wrong user name" << endl;
 		return;
 	}
 	else {
@@ -70,16 +70,7 @@ void makeListOfCustomers(vector<Customer> &customer) {
 	}
 }
 
-double getTokens(vector<Customer> customer, string username){
-	for (int i = 0; i < customer.size(); i++) {
-		if (customer[i].m_cusName == username) {
-			return customer[i].m_tokens;
-		}
-	}
-	return 0;
-}
-
-void viewTransactionHistory(vector<Customer> customer, string username) {
+void Customer:: viewTransactionHistory(vector<Customer> customer, string username) {
 	cout << "___________VIEW HISTORY TRANSACTION ___________" << endl << endl;;
 	for (int i = 0; i < customer.size(); i++) {
 		if (customer[i].m_cusName == username) {

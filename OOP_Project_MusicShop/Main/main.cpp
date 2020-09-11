@@ -32,7 +32,7 @@ int main() {
 		cin >> customer_choice;
 	}
 	if (customer_choice == 1) {
-		cout << "Your Tokens:= " << getTokens(customer, username); //username nay la luc ng dung dang nhap, dung username do de thuc hien chuong trinh.
+		cout << "Your Tokens:= " ; //username nay la luc ng dung dang nhap, dung username do de thuc hien chuong trinh. ///nho them vo gettoken
 	}
 	else if (customer_choice == 2) {
 		albumOption(album);
@@ -41,7 +41,7 @@ int main() {
 		searchAlbum(album);
 	}
 	else if (customer_choice == 4) {
-		viewTransactionHistory(customer, username);
+		//Customer::viewTransactionHistory(customer, username);
 	}
 	else if (customer_choice == 7) {
 		printBestRate_Seller(album, store);

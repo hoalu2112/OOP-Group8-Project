@@ -1,6 +1,7 @@
 #ifndef _MUSIC_H_
 #define _MUSIC_H_
 
+#include "Customer.h"
 #include<iostream>
 #include <string>
 #include <fstream>
@@ -70,7 +71,7 @@ protected:
 	vector<Album> m_album;
 public:
 	double total_price();
-	void Buy_ALL();
+	void Buy_ALL(const Customer& Current_Cus);
 	void add();
 	void delete_album();
 };

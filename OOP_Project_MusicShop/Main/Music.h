@@ -50,7 +50,7 @@ public:
 	void writeFileInfo(); //override to text file "INFO_ID.txt".
 	friend void searchAlbum(vector<Album> album); // search info of albums //CUSTOMER.
 	friend void printBestRate_Seller(vector<Album> album, Store store); // print best seller/ best rate for customer.
-	
+	int Tel_price() { return m_price; }
 	
 	
 };
@@ -65,10 +65,19 @@ public:
 	friend void printBestRate_Seller(vector<Album> album, Store store); // print best seller/ best rate for customer.
 };
 
+class Cart {
+protected:
+	vector<Album> m_album;
+public:
+	double total_price();
+	void Buy_ALL();
+	void add();
+	void delete_album();
+};
+
 
 void makeListOfAlbums(vector<Album> &album); // read all file of Album "Info_ID.txt".
 
 //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER 
 void albumOption(vector<Album> album); // customer_choice =2
-
 #endif

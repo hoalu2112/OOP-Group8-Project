@@ -388,3 +388,12 @@ void albumOption(vector<Album> album) {
 		albumOption(album);
 	}
 }
+
+double Cart::total_price()
+{
+	double result;
+	for (int i = 0; i < m_album.size(); i++) {
+		result += m_album[i].Tel_price();
+	}
+	return result;
+}

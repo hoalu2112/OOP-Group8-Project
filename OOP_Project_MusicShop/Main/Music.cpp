@@ -208,6 +208,7 @@ void Album::rateAlbum() {
 	}
 	this->m_rateCounts++;
 	this->m_totalPoint += rate;
+	cout << "Thank you for your survey (^-^)" << endl << endl;
 	this->writeFileInfo();
 }
 
@@ -225,7 +226,7 @@ void Album::writeFileInfo() {
 		fout << this->m_albumName << endl;
 		fout << this->m_demo << endl;
 		fout << this->m_poster << endl;
-		fout << this->m_release << endl;
+		fout << this->m_release.toString() << endl;
 		fout << this->m_price << endl;
 		fout << this->m_rateCounts << endl;
 		fout << this->m_totalPoint << endl;

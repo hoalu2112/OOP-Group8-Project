@@ -21,9 +21,6 @@
     <ClCompile Include="Music.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Customer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Music.h">
@@ -54,9 +51,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Static\Tokenizer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Customer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,14 +3,17 @@
 #include "Transaction.h"
 #include "Manager.h"
 
+
+
+////CUSTOMER.
+
 int main() {
-	
+	Store store;
 	vector<Manager> manager;
 	makeListofManagers(manager);
-	Store store;
-	////CUSTOMER.
 	vector <Customer> customer;
 	makeListOfCustomers(customer);
+	
 GOTO:
 	cout << "___MENU___" << endl;
 	cout << "1> Manager.\n";
@@ -20,13 +23,13 @@ GOTO:
 	cout << "__Enter your choice: ";
 	cin >> choice;
 
-	while (choice <= 0 || choice >= 3) {
+	while (choice <= 0 || choice >= 4) {
 		cout << "Invalid!!\n";
 		cout << "__Enter your choice: ";
 		cin >> choice;
 	}
 	if (choice == 1) {
-
+		
 	}
 	else
 		if (choice == 2) {
@@ -66,6 +69,6 @@ GOTO:
 			if (choice == 3) {
 				return 0;
 			}
-
+	//overwriteFileCustomer_txt(customer);
 	return 0;
 }

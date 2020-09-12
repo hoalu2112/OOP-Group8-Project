@@ -8,6 +8,8 @@
 #include "Music.h"
 using namespace std;
 
+
+
 class Store;
 
 class Customer{
@@ -21,10 +23,10 @@ protected:
 public:
 	Customer(string username);
 	double getTokens() { return m_tokens; } // xem tokens con lai trong tai khoan.
-	void viewTransactionHistory(vector<Customer>customer, string username); //xem lich su giao dich.
-	void overwriteFileCustomer_txt(vector<Customer> customer); //ghi lai file Customer.TXT neu co chinh sua.
-	void overwriteCustomerName_txt(vector<Customer> customer,string username); //ghi lai file tenkhachhang.TXT neu co chinh sua.
-	void changePasswordCustomer(vector<Customer>customer, string username); // customer co the doi mat khau cua ho.
+	void viewTransactionHistory(); //xem lich su giao dich.
+	friend void overwriteFileCustomer_txt(vector<Customer> customer); //ghi lai file Customer.TXT neu co chinh sua.
+	void overwriteCustomerName_txt(); //ghi lai file tenkhachhang.TXT neu co chinh sua.
+	void changePasswordCustomer(); // customer co the doi mat khau cua ho.
 	void print();
 	void Menu(Store& store );
 	bool check_user(string user) { return this->m_cusName == user; }

@@ -50,6 +50,8 @@ public:
 	void writeFileInfo(); //override to text file "INFO_ID.txt".
 	friend void searchAlbum(vector<Album> album); // search info of albums //CUSTOMER.
 	friend void printBestRate_Seller(vector<Album> album, Store store); // print best seller/ best rate for customer.
+	int getID();
+	int getPrice();
 	
 	
 	
@@ -63,6 +65,12 @@ private:
 public: 
 	Store();
 	friend void printBestRate_Seller(vector<Album> album, Store store); // print best seller/ best rate for customer.
+	void importItem(string ID, int items);
+	void exportItem(string ID, int items);
+	int calcProfit();
+	int calcLeavings();
+	int calcItemSold();
+	int totalExport();
 };
 
 

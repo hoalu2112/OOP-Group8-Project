@@ -4,7 +4,7 @@
 
 Store::Store() {
 	ifstream fin;
-	fin.open("C:\\Users\\user\\Desktop\\Store.txt");
+	fin.open("C:\\Users\\Admin\\source\\repos\\HK3\\OOP-Group8-Project\\Store.txt");
 	if (!fin.is_open()) {
 		cout << "Can not open file." << endl;
 		return;
@@ -33,7 +33,7 @@ Store::Store() {
 
 
 vector<Song> Song::readFile(int id) {
-	string link_album = "C:\\Users\\user\\Desktop\\";
+	string link_album = "C:\\Users\\Admin\\source\\repos\\HK3\\OOP-Group8-Project\\";
 	stringstream ss;
 	ss << link_album << id << "\\Song_" << id << ".txt";
 
@@ -94,7 +94,7 @@ void Song::printInfoSong() {
 }
 
 Album::Album(int id) {
-	string link_album = "C:\\Users\\user\\Desktop\\";
+	string link_album = "C:\\Users\\Admin\\source\\repos\\HK3\\OOP-Group8-Project\\";
 	stringstream ss;
 	ss << link_album << id <<"\\Info_" << id << ".txt";
 
@@ -319,7 +319,7 @@ void printBestRate_Seller(vector<Album> album, Store store){
 
 void makeListOfAlbums(vector<Album>& album) {
 	ifstream fin;
-	fin.open("C:\\Users\\user\\Desktop\\ID_Album.txt");
+	fin.open("C:\\Users\\Admin\\source\\repos\\HK3\\OOP-Group8-Project\\ID_Album.txt");
 	if (!fin.is_open()) {
 		cout << "Can not open file" << endl;
 		return;

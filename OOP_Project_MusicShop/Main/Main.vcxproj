@@ -140,9 +140,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Music.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Manager.h" />
     <ClInclude Include="Music.h" />
     <ClInclude Include="Static\bitmap.h" />
     <ClInclude Include="Static\Date.h" />

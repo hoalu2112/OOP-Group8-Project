@@ -4,7 +4,7 @@
 
 Store::Store() {
 	ifstream fin;
-	fin.open("C:\\Users\\user\\Desktop\\Store.txt");
+	fin.open("C:\\Users\\Admin\\source\\repos\\HK3\\OOP-Group8-Project\\Store.txt");
 	if (!fin.is_open()) {
 		cout << "Can not open file." << endl;
 		return;
@@ -33,7 +33,7 @@ Store::Store() {
 
 
 vector<Song> Song::readFile(int id) {
-	string link_album = "C:\\Users\\user\\Desktop\\";
+	string link_album = "C:\\Users\\Admin\\source\\repos\\HK3\\OOP-Group8-Project\\";
 	stringstream ss;
 	ss << link_album << id << "\\Song_" << id << ".txt";
 
@@ -94,7 +94,7 @@ void Song::printInfoSong() {
 }
 
 Album::Album(int id) {
-	string link_album = "C:\\Users\\user\\Desktop\\";
+	string link_album = "C:\\Users\\Admin\\source\\repos\\HK3\\OOP-Group8-Project\\";
 	stringstream ss;
 	ss << link_album << id <<"\\Info_" << id << ".txt";
 
@@ -212,7 +212,7 @@ void Album::rateAlbum() {
 }
 
 void Album::writeFileInfo() {
-	string link_album = "C:\\Users\\user\\Desktop\\";
+	string link_album = "C:\\Users\\Admin\\source\\repos\\HK3\\OOP-Group8-Project\\";
 	stringstream ss;
 	ss << link_album << this->m_id << "\\Info_" << this->m_id << ".txt";
 
@@ -317,9 +317,66 @@ void printBestRate_Seller(vector<Album> album, Store store){
 	}
 }
 
+void Store::importItem(string ID, int items)
+{
+	for (int i = 0; i < this->m_album.size(); i++) {
+		if (stoi(ID) == m_album[i].getID()) {
+			this->m_import[i] += items;
+			cout << "success";
+		}
+	}
+	cout << "fail";
+}
+
+void Store::exportItem(string ID, int items)
+{
+	for (int i = 0; i < this->m_album.size(); i++) {
+		if (stoi(ID) == m_album[i].getID())
+			this->m_export[i] += items;
+	}
+}
+
+int Store::calcProfit()
+{
+	int profit = 0;
+	for (int i = 0; i < m_album.size(); i++) {
+		profit += m_export[i] * m_album[i].getPrice();
+	}
+	return profit;
+}
+
+int Store::calcLeavings()
+{
+	int leavings = 0;
+	for (int i = 0; i < m_album.size(); i++) {
+		leavings = m_import[i] - m_export[i];
+	}
+	return 0;
+}
+
+int Store::calcItemSold()
+{
+	int items = 0;
+	for (int i = 0; i < m_album.size(); i++) {
+		if (m_export[i] != 0) {
+			items++;
+		}
+	}
+	return items;
+}
+
+int Store::totalExport()
+{
+	int out = 0;
+	for (int i = 0; i < m_album.size(); i++) {
+		out += m_export[i];
+	}
+	return out;
+}
+
 void makeListOfAlbums(vector<Album>& album) {
 	ifstream fin;
-	fin.open("C:\\Users\\user\\Desktop\\ID_Album.txt");
+	fin.open("C:\\Users\\Admin\\source\\repos\\HK3\\OOP-Group8-Project\\ID_Album.txt");
 	if (!fin.is_open()) {
 		cout << "Can not open file" << endl;
 		return;
@@ -387,4 +444,12 @@ void albumOption(vector<Album> album) {
 		album[album_order - 1].rateAlbum();
 		albumOption(album);
 	}
+}
+
+int Album::getID() {
+	return m_id;
+}
+
+int Album::getPrice() {
+	return m_price;
 }

@@ -47,7 +47,7 @@ int main() {
 		printBestRate_Seller(album, store);
 	}
 	else if (customer_choice == 9) {
-		changePasswordCustomer(customer, username);
+		//changePasswordCustomer(customer, username);
 	}
 	else if (customer_choice == 10) {
 		cout << "You have been log out." << endl;

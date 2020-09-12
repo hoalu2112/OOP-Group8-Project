@@ -1,6 +1,6 @@
 VI SAO XANH
-C:\Users\user\Desktop\10000\TINH YEU SE TOI_BEAT.wav
-C:\Users\user\Desktop\10000\TINH_YEU_SE_TOI_Poster.bmp
+..\..\Album\10000\TINH YEU SE TOI_BEAT.wav
+..\..\Album\10000\TINH_YEU_SE_TOI_Poster.bmp
 1/10/2020
 35
 7

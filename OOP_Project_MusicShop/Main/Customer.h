@@ -20,9 +20,9 @@ public:
 	Customer(string username);
 	double getTokens() { return m_tokens; } // xem tokens con lai trong tai khoan.
 	void viewTransactionHistory(vector<Customer>customer, string username); //xem lich su giao dich.
-	friend void overwriteFileCustomer_txt(vector<Customer> customer); //ghi lai file Customer.TXT neu co chinh sua.
-	friend void overwriteCustomerName_txt(vector<Customer> customer,string username); //ghi lai file tenkhachhang.TXT neu co chinh sua.
-	friend void changePasswordCustomer(vector<Customer>customer, string username); // customer co the doi mat khau cua ho.
+	void overwriteFileCustomer_txt(vector<Customer> customer); //ghi lai file Customer.TXT neu co chinh sua.
+	void overwriteCustomerName_txt(vector<Customer> customer,string username); //ghi lai file tenkhachhang.TXT neu co chinh sua.
+	void changePasswordCustomer(vector<Customer>customer, string username); // customer co the doi mat khau cua ho.
 	void print() {
 		cout << this->m_trans.size();
 	}

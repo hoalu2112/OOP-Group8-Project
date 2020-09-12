@@ -81,7 +81,7 @@ void Customer:: viewTransactionHistory(vector<Customer> customer, string usernam
 	}
 }
 
-void overwriteFileCustomer_txt(vector<Customer> customer) {
+void Customer:: overwriteFileCustomer_txt(vector<Customer> customer) {
 	ofstream fout;
 	fout.open("..\\..\\Customer_Users.txt");
 	if (!fout.is_open()) {
@@ -98,7 +98,7 @@ void overwriteFileCustomer_txt(vector<Customer> customer) {
 	}
 }
 
-void overwriteCustomerName_txt(vector<Customer> customer,string username) {
+void Customer:: overwriteCustomerName_txt(vector<Customer> customer,string username) {
 	ofstream fout;
 	string link_customer = "..\\..\\All_Users\\";
 	stringstream ss;
@@ -126,7 +126,7 @@ void overwriteCustomerName_txt(vector<Customer> customer,string username) {
 		fout.close();
 	}
 }
-void changePasswordCustomer(vector<Customer>customer, string username) {
+void Customer::changePasswordCustomer(vector<Customer>customer, string username) {
 	cout << "_____CHANGE YOUR PASSWORD_______" << endl <<endl;
 	cout << "__Enter your old password: ";
 	string old_pass;

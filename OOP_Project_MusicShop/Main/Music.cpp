@@ -156,6 +156,7 @@ void Album::printPoster() {
 
 	draw(bmp);
 	getchar();
+	Sleep(500);
 	system("pause");
 
 	//getchar();
@@ -401,4 +402,5 @@ double Cart::total_price()
 
 void Cart::Buy_ALL(const Customer& Current_Cus)
 {
+	//Current_Cus.
 }

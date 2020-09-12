@@ -1,6 +1,6 @@
 THANH PHO MAU VANG
-C:\Users\user\Desktop\20000\CO_BEAT.wav
-C:\Users\user\Desktop\20000\CO_Poster.bmp
+..\..\Album\20000\CO_BEAT.wav
+..\..\Album\20000\CO_Poster.bmp
 24/12/2020
 25
 5

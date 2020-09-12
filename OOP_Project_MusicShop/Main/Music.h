@@ -1,6 +1,7 @@
 #ifndef _MUSIC_H_
 #define _MUSIC_H_
 
+#include "Customer.h"
 #include<iostream>
 #include <string>
 #include <fstream>
@@ -53,6 +54,7 @@ public:
 	int getID();
 	int getPrice();
 	
+	int Tel_price() { return m_price; }
 	
 	
 };
@@ -73,10 +75,19 @@ public:
 	int totalExport();
 };
 
+class Cart {
+protected:
+	vector<Album> m_album;
+public:
+	double total_price();
+	void Buy_ALL(const Customer& Current_Cus);
+	void add();
+	void delete_album();
+};
+
 
 void makeListOfAlbums(vector<Album> &album); // read all file of Album "Info_ID.txt".
 
 //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER 
 void albumOption(vector<Album> album); // customer_choice =2
-
 #endif

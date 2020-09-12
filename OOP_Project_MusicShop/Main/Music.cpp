@@ -4,9 +4,9 @@
 
 Store::Store() {
 	ifstream fin;
-	fin.open("C:\\Users\\Admin\\source\\repos\\HK3\\OOP-Group8-Project\\Store.txt");
+	fin.open("..\\..\\Store.txt");
 	if (!fin.is_open()) {
-		cout << "Can not open file." << endl;
+		cout << "Can not open file store." << endl;
 		return;
 	}
 	else {
@@ -33,7 +33,7 @@ Store::Store() {
 
 
 vector<Song> Song::readFile(int id) {
-	string link_album = "C:\\Users\\Admin\\source\\repos\\HK3\\OOP-Group8-Project\\";
+	string link_album = "..\\..\\Album\\";
 	stringstream ss;
 	ss << link_album << id << "\\Song_" << id << ".txt";
 
@@ -41,7 +41,7 @@ vector<Song> Song::readFile(int id) {
 	ifstream fin;
 	fin.open(ss.str().c_str());
 	if (!fin.is_open()) {
-		cout << "Can not open file" << endl;
+		cout << "Can not open file Song" << endl;
 	}
 	else {
 		int song_numbers;
@@ -94,14 +94,14 @@ void Song::printInfoSong() {
 }
 
 Album::Album(int id) {
-	string link_album = "C:\\Users\\Admin\\source\\repos\\HK3\\OOP-Group8-Project\\";
+	string link_album = "..\\..\\Album\\";
 	stringstream ss;
 	ss << link_album << id <<"\\Info_" << id << ".txt";
 
 	ifstream fin;
 	fin.open(ss.str().c_str());
 	if (!fin.is_open()) {
-		cout << "Can not open file" << endl;
+		cout << "Can not open file info id" << endl;
 	}
 	else {
 		this->m_id = id;
@@ -156,6 +156,7 @@ void Album::printPoster() {
 
 	draw(bmp);
 	getchar();
+	Sleep(500);
 	system("pause");
 
 	//getchar();
@@ -208,11 +209,12 @@ void Album::rateAlbum() {
 	}
 	this->m_rateCounts++;
 	this->m_totalPoint += rate;
+	cout << "Thank you for your survey (^-^)" << endl << endl;
 	this->writeFileInfo();
 }
 
 void Album::writeFileInfo() {
-	string link_album = "C:\\Users\\Admin\\source\\repos\\HK3\\OOP-Group8-Project\\";
+	string link_album = "..\\..\\Album\\";
 	stringstream ss;
 	ss << link_album << this->m_id << "\\Info_" << this->m_id << ".txt";
 
@@ -225,7 +227,7 @@ void Album::writeFileInfo() {
 		fout << this->m_albumName << endl;
 		fout << this->m_demo << endl;
 		fout << this->m_poster << endl;
-		fout << this->m_release << endl;
+		fout << this->m_release.toString() << endl;
 		fout << this->m_price << endl;
 		fout << this->m_rateCounts << endl;
 		fout << this->m_totalPoint << endl;
@@ -376,9 +378,9 @@ int Store::totalExport()
 
 void makeListOfAlbums(vector<Album>& album) {
 	ifstream fin;
-	fin.open("C:\\Users\\Admin\\source\\repos\\HK3\\OOP-Group8-Project\\ID_Album.txt");
+	fin.open("..\\..\\Album\\ID_Album.txt");
 	if (!fin.is_open()) {
-		cout << "Can not open file" << endl;
+		cout << "Can not open file album" << endl;
 		return;
 	}
 	else {
@@ -452,4 +454,17 @@ int Album::getID() {
 
 int Album::getPrice() {
 	return m_price;
+}
+double Cart::total_price()
+{
+	double result=0;
+	for (int i = 0; i < m_album.size(); i++) {
+		result += m_album[i].Tel_price();
+	}
+	return result;
+}
+
+void Cart::Buy_ALL(const Customer& Current_Cus)
+{
+	//Current_Cus.
 }

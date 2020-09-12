@@ -5,8 +5,10 @@
 #include <vector>
 #include <fstream>
 #include "Transaction.h"
+#include "Music.h"
 using namespace std;
 
+class Store;
 
 class Customer{
 protected:
@@ -23,9 +25,10 @@ public:
 	void overwriteFileCustomer_txt(vector<Customer> customer); //ghi lai file Customer.TXT neu co chinh sua.
 	void overwriteCustomerName_txt(vector<Customer> customer,string username); //ghi lai file tenkhachhang.TXT neu co chinh sua.
 	void changePasswordCustomer(vector<Customer>customer, string username); // customer co the doi mat khau cua ho.
-	void print() {
-		cout << this->m_trans.size();
-	}
+	void print();
+	void Menu(Store& store );
+	bool check_user(string user) { return this->m_cusName == user; }
+	bool check_pass(string pass) { return this->m_cusPass == pass; }
 };
 void makeListOfCustomers(vector<Customer>& customer); // doc file Customer.txt --> luu het cac thong tin cua tung customer vao vector.
 

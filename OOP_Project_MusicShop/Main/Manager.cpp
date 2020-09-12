@@ -114,11 +114,6 @@ void changePassword(vector<Manager> manager, string username) {
 }
 
 void Manager::menu(string username) {
-	vector<Album> album;
-	Store store;
-	vector<Manager> manager;
-	makeListOfAlbums(album);
-	makeListofManagers(manager);
 
 	cout << "___MENU___" << endl;
 	cout << "1> Calculate which albums have been sold.\n";

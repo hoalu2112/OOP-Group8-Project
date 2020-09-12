@@ -21,7 +21,7 @@ using namespace std;
 class Store;
 
 class Song{
-private:
+protected:
 	string m_name; //name of the song.
 	vector<string> m_singer;
 	vector<string> m_author;
@@ -31,7 +31,7 @@ public:
 };
 
 class Album {
-private:
+protected:
 	int m_id; // id of album.
 	string m_albumName; //name album.
 	string m_demo;//link to 30s.
@@ -45,12 +45,13 @@ public:
 	Album (int id); // constructor used to read file which relate to the album (ID).
 	void printPoster(); // print the poster of the album (bmp files).
 	void printInfo(); // print every information of the album.
-	friend void printListOfAlbums(vector<Album> album);//CUSTOMER.
+	friend void printListOfAlbums(const Store&store);//CUSTOMER.
 	void playDemo(); //listen to 30s demo of special song of the album.
 	void rateAlbum(); //customer rate album quality (max 5*).//CUSTOMER.
 	void writeFileInfo(); //override to text file "INFO_ID.txt".
-	friend void searchAlbum(vector<Album> album); // search info of albums //CUSTOMER.
-	friend void printBestRate_Seller(vector<Album> album, Store store); // print best seller/ best rate for customer.
+	friend void searchAlbum( Store& store); // search info of albums //CUSTOMER.
+	friend void printBestRate_Seller(const Store& store); // print best seller/ best rate for customer.
+	friend void albumOption( Store& store);
 	int getID();
 	int getPrice();
 	
@@ -60,19 +61,23 @@ public:
 };
 
 class Store {
-private:
+protected:
 	vector<Album> m_album;
 	vector<int> m_import;
 	vector<int> m_export; //sold.
 public: 
 	Store();
-	friend void printBestRate_Seller(vector<Album> album, Store store); // print best seller/ best rate for customer.
+	friend void printBestRate_Seller(const Store& store); // print best seller/ best rate for customer.
+	friend void printListOfAlbums(const Store& store);
+	friend void searchAlbum( Store& store);
+	friend void albumOption( Store& store);
 	void importItem(string ID, int items);
 	void exportItem(string ID, int items);
 	int calcProfit();
 	int calcLeavings();
 	int calcItemSold();
 	int totalExport();
+	vector<Album> get_album() { return this->m_album; }
 };
 
 class Cart {
@@ -80,7 +85,7 @@ protected:
 	vector<Album> m_album;
 public:
 	double total_price();
-	void Buy_ALL(const Customer& Current_Cus);
+	void Buy_ALL();
 	void add();
 	void delete_album();
 };
@@ -89,5 +94,5 @@ public:
 void makeListOfAlbums(vector<Album> &album); // read all file of Album "Info_ID.txt".
 
 //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER 
-void albumOption(vector<Album> album); // customer_choice =2
+ // customer_choice =2
 #endif

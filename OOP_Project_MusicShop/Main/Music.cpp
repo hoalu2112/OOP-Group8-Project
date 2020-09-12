@@ -181,10 +181,10 @@ void Album::printInfo() {
 
 }
 
-void printListOfAlbums(vector<Album> album) {
+void printListOfAlbums(const Store& store) {
 	cout << "List of albums:" << endl;
-	for (int i = 0; i < album.size(); i++) {
-		cout << i + 1 << ">" << album[i].m_albumName << endl;
+	for (int i = 0; i < store.m_album.size(); i++) {
+		cout << i + 1 << ">" << store.m_album[i].m_albumName << endl;
 	}
 }
 void Album::playDemo() {
@@ -240,7 +240,7 @@ void Album::writeFileInfo() {
 
 
 
-void searchAlbum(vector<Album> album) {
+void searchAlbum(Store& store) {
 	cout << "__________________________________SEARCH ALBUM________________________________________" << endl;
 
 	string search;
@@ -251,51 +251,54 @@ void searchAlbum(vector<Album> album) {
 
 	int count = 0; // increase when can not find result.
 
-	for (int i = 0; i < album.size(); i++) {
+	for (int i = 0; i < store.m_album.size(); i++) {
 
-		const char* name = strstr(search.c_str(),album[i].m_albumName.c_str()); //search by name.
-		const char* release_date = strstr(search.c_str(), album[i].m_release.toString().c_str());//search by release date.
+		const char* name = strstr(search.c_str(), store.m_album[i].m_albumName.c_str()); //search by name.
+		 
+		const char* release_date = strstr(search.c_str(), store.m_album[i].m_release.toString().c_str());//search by release date.
 
 		//search by price.
 		stringstream s;
-		s << album[i].m_price; 
+		s << store.m_album[i].m_price;
 		const char* price = strstr(search.c_str(), s.str().c_str());
 
 		//search by id.
 		stringstream ss;
-		ss << album[i].m_id;
+		ss << store.m_album[i].m_id;
 		const char* id = strstr(search.c_str(), ss.str().c_str());
 
 		if (name || release_date || price || id) {
-			album[i].printInfo();
+			store.m_album[i].printInfo();
 			cout << endl;
 		}
 		else {
 			count++;
 		}
 	}
-	if(count == album.size())
+	if(count == store.m_album.size())
 		cout << "(-_-) Can't find your album." << endl;
 	return;
 
 }
 
-void printBestRate_Seller(vector<Album> album, Store store){
-	cout << "_____Best Rate:______" << endl;
-	double best_rate = album[0].m_totalPoint / album[0].m_rateCounts; // assigned max for first element.
 
-	for (int i = 1; i < album.size(); i++) {
-		if (album[i].m_totalPoint / album[i].m_rateCounts > best_rate) {
-			best_rate = album[i].m_totalPoint / album[i].m_rateCounts;
+void printBestRate_Seller(const Store& store)
+{
+	cout << "_____Best Rate:______" << endl;
+	double best_rate = store.m_album[0].m_totalPoint / store.m_album[0].m_rateCounts; // assigned max for first element.
+
+	for (int i = 1; i < store.m_album.size(); i++) {
+		if (store.m_album[i].m_totalPoint / store.m_album[i].m_rateCounts > best_rate) {
+			best_rate = store.m_album[i].m_totalPoint / store.m_album[i].m_rateCounts;
 		}
 	}
-	for (int i = 0; i < album.size(); i++) {
-		if (album[i].m_totalPoint / album[i].m_rateCounts == best_rate) {
-			cout << "ID: " << album[i].m_id << endl;
-			cout << "Album's name: " << album[i].m_albumName << endl;
-			cout << "Tokens: " << album[i].m_price << endl;
-			cout << "Date release: " << album[i].m_release << endl;
-			cout << "Rate: " << album[i].m_totalPoint / album[i].m_rateCounts << endl << endl;
+	for (int i = 0; i < store.m_album.size(); i++) {
+		if (store.m_album[i].m_totalPoint / store.m_album[i].m_rateCounts == best_rate) {
+			cout << "ID: " << store.m_album[i].m_id << endl;
+			cout << "Album's name: " << store.m_album[i].m_albumName << endl;
+			cout << "Tokens: " << store.m_album[i].m_price << endl;
+			cout << "Date release: " << store.m_album[i].m_release << endl;
+			cout << "Rate: " << store.m_album[i].m_totalPoint / store.m_album[i].m_rateCounts << endl << endl;
 		}
 	}
 
@@ -403,8 +406,8 @@ void makeListOfAlbums(vector<Album>& album) {
 
 
 //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER 
-void albumOption(vector<Album> album) {
-	printListOfAlbums(album);
+void albumOption(Store& store) {
+	printListOfAlbums(store);
 	cout << "______Album's options:" << endl;
 	cout << "1> Print Information Of The Album." << endl;
 	cout << "2> Play Demo(30s) From The Album." << endl;
@@ -427,24 +430,24 @@ void albumOption(vector<Album> album) {
 	int album_order;
 	cout << "__Enter album's order: "; //so thu tu cua album.
 	cin >> album_order;
-	while (album_order <= 0 || album_order > album.size()) {
+	while (album_order <= 0 || album_order > store.m_album.size()) {
 		cout << "Invalid!!" << endl;
 		cout << "__Enter album's order: ";
 		cin >> album_order;
 	}
 
 	if (album_option == 1) {
-		album[album_order - 1].printPoster();
-		album[album_order - 1].printInfo();
-		albumOption(album);
+		store.m_album[album_order - 1].printPoster();
+		store.m_album[album_order - 1].printInfo();
+		albumOption(store);
 	}
 	else if (album_option == 2) {
-		album[album_order - 1].playDemo();
-		albumOption(album);
+		store.m_album[album_order - 1].playDemo();
+		albumOption(store);
 	}
 	else if (album_option == 3) {
-		album[album_order - 1].rateAlbum();
-		albumOption(album);
+		store.m_album[album_order - 1].rateAlbum();
+		albumOption(store);
 	}
 }
 
@@ -464,7 +467,3 @@ double Cart::total_price()
 	return result;
 }
 
-void Cart::Buy_ALL(const Customer& Current_Cus)
-{
-	//Current_Cus.
-}

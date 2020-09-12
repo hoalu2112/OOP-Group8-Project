@@ -1,7 +1,7 @@
 #include "Manager.h"
 
 Manager::Manager(string username) {
-	string link_customer = "C:\\Users\\user\\Desktop\\All_Users\\";
+	string link_customer = "..\\..\\All_Users\\MANAGER\\";
 	stringstream ss;
 	ss << link_customer << username << ".txt";
 	ifstream fin;
@@ -24,7 +24,7 @@ Manager::Manager(string username) {
 
 void overwriteManagerName_txt(vector<Manager> manager, string username) {
 	ofstream fout;
-	string link_customer = "C:\\Users\\user\\Desktop\\All_Users\\";
+	string link_customer = "..\\..\\All_Users\\MANAGER\\";
 	stringstream ss;
 	ss << link_customer << username << ".txt";
 
@@ -46,7 +46,7 @@ void overwriteManagerName_txt(vector<Manager> manager, string username) {
 
 void overwriteManagerFile_txt(vector<Manager> manager) {
 	ofstream fout;
-	fout.open("C:\\Users\\user\\Desktop\\Manager_Users.txt");
+	fout.open("..\\..\\All_Users\\MANAGER\\Manager_Users.txt");
 	if (!fout.is_open()) {
 		cout << "Can not overwrite file !" << endl;
 		return;
@@ -63,7 +63,7 @@ void overwriteManagerFile_txt(vector<Manager> manager) {
 
 void makeListofManagers(vector<Manager>& manager) {
 	ifstream fin;
-	fin.open("C:\\Users\\user\\Desktop\\Manager_Users.txt");
+	fin.open("..\\..\\All_Users\\MANAGER\\Manager_Users.txt");
 	if (!fin.is_open()) {
 		cout << "Can not open file" << endl;
 		return;

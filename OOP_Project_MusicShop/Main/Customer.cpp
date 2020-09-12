@@ -44,7 +44,7 @@ Customer::Customer(string username) {
 
 void makeListOfCustomers(vector<Customer> &customer) {
 	ifstream fin;
-	fin.open("..\\..\\Customer_Users.txt");
+	fin.open("..\\..\\All_Users\\CUSTOMER\\Customer_Users.txt");
 	if (!fin.is_open()) {
 		cout << "Can not open file" << endl;
 		return;
@@ -83,7 +83,7 @@ void Customer:: viewTransactionHistory(vector<Customer> customer, string usernam
 
 void Customer:: overwriteFileCustomer_txt(vector<Customer> customer) {
 	ofstream fout;
-	fout.open("..\\..\\Customer_Users.txt");
+	fout.open("..\\..\\All_Users\\CUSTOMER\\Customer_Users.txt");
 	if (!fout.is_open()) {
 		cout << "Can not overwrite file !" << endl;
 		return;
@@ -100,7 +100,7 @@ void Customer:: overwriteFileCustomer_txt(vector<Customer> customer) {
 
 void Customer:: overwriteCustomerName_txt(vector<Customer> customer,string username) {
 	ofstream fout;
-	string link_customer = "..\\..\\All_Users\\";
+	string link_customer = "..\\..\\All_Users\\CUSTOMER\\";
 	stringstream ss;
 	ss << link_customer << username << ".txt";
 

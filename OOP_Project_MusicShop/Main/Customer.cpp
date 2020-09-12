@@ -1,7 +1,7 @@
 #include "Customer.h"
 
 Customer::Customer(string username) {
-	string link_customer = "..\\..\\All_Users\\";
+	string link_customer = "..\\..\\All_Users\\CUSTOMER\\";
 	stringstream ss;
 	ss << link_customer << username << ".txt";
 	ifstream fin;

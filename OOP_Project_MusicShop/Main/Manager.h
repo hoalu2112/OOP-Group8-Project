@@ -15,12 +15,13 @@ private:
 	string m_manName, m_manPass;
 public:
 	Manager(string username);
-	friend void changePassword(vector<Manager> manager, string username);
-	friend void overwriteManagerName_txt(vector<Manager> manager,string username);
+	void changePassword();
+	void overwriteManagerName_txt();
 	friend void overwriteManagerFile_txt(vector<Manager> manager);
-	friend void makeListofManagers(vector<Manager>& manager);
-	void menu(string username);
+	void menu(Store& store);
+	bool check_user(string user) { return this->m_manName == user; }
+	bool check_pass(string pass) { return this->m_manPass == pass; }
 };
+void makeListofManagers(vector<Manager>& manager);
 
 #endif // !_MANAGER_H_
-

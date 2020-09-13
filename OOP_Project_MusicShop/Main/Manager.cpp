@@ -7,7 +7,7 @@ Manager::Manager(string username) {
 	ifstream fin;
 	fin.open(ss.str().c_str());
 	if (!fin.is_open()) {
-		cout << "Can not open file" << endl;
+		cout << "Can not open file!" << endl;
 		return;
 	}
 	else {
@@ -22,11 +22,11 @@ Manager::Manager(string username) {
 	fin.close();
 }
 
-void overwriteManagerName_txt(vector<Manager> manager, string username) {
+void Manager::overwriteManagerName_txt() {
 	ofstream fout;
 	string link_customer = "..\\..\\All_Users\\MANAGER\\";
 	stringstream ss;
-	ss << link_customer << username << ".txt";
+	ss << link_customer << this->m_manName << ".txt";
 
 	fout.open(ss.str().c_str());
 	if (!fout.is_open()) {
@@ -34,12 +34,9 @@ void overwriteManagerName_txt(vector<Manager> manager, string username) {
 		return;
 	}
 	else {
-		for (int i = 0; i < manager.size(); i++) {
-			if (manager[i].m_manName == username) {
-				fout << manager[i].m_manName << endl;
-				fout << manager[i].m_manPass << endl;
-			}
-		}
+
+		fout << this->m_manName << endl;
+		fout << this->m_manPass << endl;
 		fout.close();
 	}
 }
@@ -55,7 +52,7 @@ void overwriteManagerFile_txt(vector<Manager> manager) {
 		fout << manager.size() << endl;
 		for (int i = 0; i < manager.size(); i++) {
 			fout << manager[i].m_manName << endl;
-			fout << manager[i].m_manPass << endl;
+			//fout << manager[i].m_manPass << endl;
 		}
 		fout.close();
 	}
@@ -77,8 +74,8 @@ void makeListofManagers(vector<Manager>& manager) {
 		for (int i = 0; i < number_of_manager; i++) {
 			string tmp_user;
 			getline(fin, tmp_user);
-			string tmp_pass;
-			getline(fin, tmp_pass);
+			//string tmp_pass;
+			//getline(fin, tmp_pass);
 			manager_username.push_back(tmp_user);
 		}
 		for (int i = 0; i < manager_username.size(); i++) {
@@ -89,31 +86,27 @@ void makeListofManagers(vector<Manager>& manager) {
 	}
 }
 
-void changePassword(vector<Manager> manager, string username) {
+void Manager::changePassword() {
 	cout << "_____CHANGE YOUR PASSWORD_______" << endl << endl;
 	cout << "__Enter your old password: ";
 	string old_pass;
 	getline(cin, old_pass);
-	for (int i = 0; i < manager.size(); i++) {
-		if (username == manager[i].m_manName) {
-			while(old_pass != manager[i].m_manPass) {
-				cout << "Old Password Is Incorrect!!" << endl;
-				cout << "__Enter your old password: ";
-				getline(cin, old_pass);
-			}
-			cout << "__Enter your new password: " << endl;
-			string new_pass;
-			getline(cin, new_pass);
-			manager[i].m_manPass = new_pass;
-			overwriteManagerName_txt(manager, username);
-			overwriteManagerFile_txt(manager);
-			cout << "Your password has been changed!" << endl;
-			return;
-		}
+	while (!this->check_pass(old_pass)) {
+		cout << this->m_manName << endl;
+		cout << "Old Password Is Incorrect!!" << endl;
+		cout << "__Enter your old password: ";
+		getline(cin, old_pass);
+
 	}
+	cout << "__Enter your new password: " << endl;
+	string new_pass;
+	getline(cin, new_pass);
+	this->m_manPass = new_pass;
+	cout << "Your password has been changed!" << endl;
+	return;
 }
 
-void Manager::menu(string username) {
+void Manager::menu(Store& store) {
 
 	cout << "___MENU___" << endl;
 	cout << "1> Calculate which albums have been sold.\n";

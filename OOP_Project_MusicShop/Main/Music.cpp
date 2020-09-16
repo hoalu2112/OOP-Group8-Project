@@ -467,3 +467,102 @@ double Cart::total_price()
 	return result;
 }
 
+void Album::editAlbumName(string name) {
+	this->m_albumName = name;
+}
+
+void Album::editPrice(int price) {
+	this->m_price = price;
+}
+
+void Album::editReleaseDate(string date) {
+	this->m_release = this->m_release.parse(date);
+}
+
+void Album::albumOverwrite_Info() {
+	string link_album = "..\\..\\Album\\";
+	stringstream ss;
+	ss << link_album << this->m_id << "\\Info_" << this->m_id << ".txt";
+
+	ofstream ofs;
+	ofs.open(ss.str().c_str());
+	if (!ofs.is_open()) {
+		cout << "Can not open file info id" << endl;
+		return;
+	}
+	else {
+		ofs << this->m_albumName << endl;
+		ofs << this->m_demo << endl;
+		ofs << this->m_poster << endl;
+		ofs << this->m_release << endl;
+		ofs << this->m_price << endl;
+		ofs << this->m_rateCounts << endl;
+		ofs << this->m_totalPoint << endl;
+		ofs.close();
+	}
+}
+
+void Store::overwriteStore_txt() {
+	ofstream ofs;
+	ofs.open("..\\..\\Store.txt");
+	if (!ofs.is_open()) {
+		cout << "Can not open file store." << endl;
+		return;
+	}
+	else {
+		ofs << this->m_album.size() << endl;
+		for (int i = 0; i < this->m_album.size(); i++) {
+			ofs << this->m_album[i].getID() << endl;
+			ofs << this->importItem[i] << endl;
+			ofs << this->exportItem[i] << endl;
+		}
+		ofs.close();
+	}
+}
+
+void Store::edit() {
+	string id;
+	cout << "Enter album ID: ";
+	getline(cin, id);
+	cin.ignore();
+	int i;
+	for (i = 0; i < this->m_album.size(); i++) {
+		if (stoi(id) == m_album[i].getID()) {
+			int choice;
+			cout << "1> Edit album's name.\n";
+			cout << "2> Edit album's price.\n";
+			cout << "3> Edit album's release date.\n";
+			cout << "4> Exit.\n";
+			cout << "\nEnter your choice: ";
+			cin >> choice;
+			while (choice <= 0 || choice >= 5) {
+				cout << "Invalid!!\n";
+				cout << "__Enter your choice: ";
+				cin >> choice;
+			}
+			if (choice == 1) {
+				string name;
+				cout << "Enter new name of album: ";
+				getline(cin, name);
+				this->m_album[i].editAlbumName(name);
+			}
+			else if (choice == 2) {
+				int price;
+				cout << "Enter new price of album: ";
+				cin >> price;
+				this->m_album[i].editPrice(price);
+			}
+			else if (choice == 3) {
+				string date;
+				cout << "Enter new release date(DD/MM/YYYY): ";
+				getline(cin, date);
+				this->m_album[i].editReleaseDate(date);
+			}
+			this->m_album[i].albumOverwrite_Info();
+			break;
+		}
+			
+	}
+	if (i >= this->m_album.size())
+		cout << "ID not found.\n";
+}

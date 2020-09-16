@@ -107,12 +107,12 @@ void Manager::changePassword() {
 }
 
 void Manager::menu(Store& store) {
-
+LOOP:
 	cout << "___MENU___" << endl;
 	cout << "1> Calculate which albums have been sold.\n";
 	cout << "2> Calculate items sold.\n";
 	cout << "3> Calculate leavings in store.\n";
-	cout << "4> Calculate profit.\n";
+	cout << "4> Calculate income.\n";
 	cout << "5> Import items.\n";
 	cout << "6> Edit album.\n";
 	cout << "7> Change password.\n";
@@ -127,6 +127,53 @@ void Manager::menu(Store& store) {
 		cout << "__Enter your choice: ";
 		cin >> choice;
 	}
-
+	if (choice == 1) {
+		int sold = store.calcItemSold();
+		if (sold > 1)
+			cout << sold << " albums have been sold.\n";
+		else
+			cout << sold << " album has been sold.\n";
+		goto LOOP;
+	}
+	else if (choice == 2) {
+		int sold = store.totalExport();
+		if (sold > 1)
+			cout << sold << " items have been sold.\n";
+		else
+			cout << sold << " item has been sold.\n";
+		goto LOOP;
+	}
+	else if (choice == 3) {
+		cout << store.calcLeavings() << "items left in the store.\n";
+		goto LOOP;
+	}
+	else if (choice == 4) {
+		cout << "Total income: " << store.calcProfit() << endl;
+		goto LOOP;
+	}
+	else if (choice == 5) {
+		int items;
+		string id;
+		cout << "Enter album's ID: ";
+		getline(cin, id);
+		cout << "Enter value to import: ";
+		cin >> items;
+		store.importItem(id,items);
+		goto LOOP;
+	}
+	else if (choice == 6) {
+		store.edit();
+		goto LOOP;
+	}
+	else if (choice == 7) {
+		changePassword();
+		overwriteManagerName_txt();
+		goto LOOP;
+	}
+	else if (choice == 8) {
+		cout << "You've been log out.\n";
+		store.overwriteStore_txt();
+		return;
+	}
 
 }

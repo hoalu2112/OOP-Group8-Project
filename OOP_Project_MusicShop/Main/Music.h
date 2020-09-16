@@ -56,7 +56,10 @@ public:
 	int getPrice();
 	
 	int Tel_price() { return m_price; }
-	
+	void editPrice(int price);
+	void editAlbumName(string name);
+	void editReleaseDate(string date);
+	void albumOverwrite_Info();
 	
 };
 
@@ -78,6 +81,8 @@ public:
 	int calcItemSold();
 	int totalExport();
 	vector<Album> get_album() { return this->m_album; }
+	void overwriteStore_txt();
+	void edit();
 };
 
 class Cart {

@@ -13,7 +13,6 @@ int main() {
 	makeListofManagers(manager);
 	vector <Customer> customer;
 	makeListOfCustomers(customer);
-	
 GOTO:
 	cout << "___MENU___" << endl;
 	cout << "1> Manager.\n";
@@ -69,6 +68,7 @@ GOTO:
 			if (choice == 3) {
 				return 0;
 			}
-	//overwriteFileCustomer_txt(customer);
+	overwriteFileCustomer_txt(customer);
+
 	return 0;
 }

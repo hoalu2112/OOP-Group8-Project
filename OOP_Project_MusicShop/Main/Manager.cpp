@@ -87,6 +87,7 @@ void makeListofManagers(vector<Manager>& manager) {
 }
 
 void Manager::changePassword() {
+	cin.ignore();
 	cout << "_____CHANGE YOUR PASSWORD_______" << endl << endl;
 	cout << "__Enter your old password: ";
 	string old_pass;
@@ -144,7 +145,7 @@ LOOP:
 		goto LOOP;
 	}
 	else if (choice == 3) {
-		cout << store.calcLeavings() << "items left in the store.\n";
+		cout << store.calcLeavings() << " items left in the store.\n";
 		goto LOOP;
 	}
 	else if (choice == 4) {
@@ -154,9 +155,10 @@ LOOP:
 	else if (choice == 5) {
 		int items;
 		string id;
-		cout << "Enter album's ID: ";
+		cin.ignore();
+		cout << "__Enter album's ID: ";
 		getline(cin, id);
-		cout << "Enter value to import: ";
+		cout << "__Enter value to import: ";
 		cin >> items;
 		store.importItem(id,items);
 		goto LOOP;

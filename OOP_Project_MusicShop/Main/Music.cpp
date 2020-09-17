@@ -324,20 +324,31 @@ void printBestRate_Seller(const Store& store)
 
 void Store::importItem(string ID, int items)
 {
-	for (int i = 0; i < this->m_album.size(); i++) {
+	int i;
+	for (i = 0; i < this->m_album.size(); i++) {
 		if (stoi(ID) == m_album[i].getID()) {
 			this->m_import[i] += items;
-			cout << "success";
+			cout << "Import succeed\n";
+			break;
 		}
 	}
-	cout << "fail";
+	if (i >= this->m_album.size()) {
+		cout << "!! ID not found !!\n";
+	}
 }
 
 void Store::exportItem(string ID, int items)
 {
-	for (int i = 0; i < this->m_album.size(); i++) {
-		if (stoi(ID) == m_album[i].getID())
+	int i;
+	for (i = 0; i < this->m_album.size(); i++) {
+		if (stoi(ID) == m_album[i].getID()) {
 			this->m_export[i] += items;
+			cout << "Export succeed\n";
+			break;
+		}
+	}
+	if (i >= this->m_album.size()) {
+		cout << "!! ID not found !!\n";
 	}
 }
 
@@ -356,7 +367,7 @@ int Store::calcLeavings()
 	for (int i = 0; i < m_album.size(); i++) {
 		leavings = m_import[i] - m_export[i];
 	}
-	return 0;
+	return leavings;
 }
 
 int Store::calcItemSold()
@@ -487,14 +498,14 @@ void Album::albumOverwrite_Info() {
 	ofstream ofs;
 	ofs.open(ss.str().c_str());
 	if (!ofs.is_open()) {
-		cout << "Can not open file info id" << endl;
+		cout << "!!Can not open file info id!!" << endl;
 		return;
 	}
 	else {
 		ofs << this->m_albumName << endl;
 		ofs << this->m_demo << endl;
 		ofs << this->m_poster << endl;
-		ofs << this->m_release << endl;
+		ofs << this->m_release.toString() << endl;
 		ofs << this->m_price << endl;
 		ofs << this->m_rateCounts << endl;
 		ofs << this->m_totalPoint << endl;
@@ -506,15 +517,15 @@ void Store::overwriteStore_txt() {
 	ofstream ofs;
 	ofs.open("..\\..\\Store.txt");
 	if (!ofs.is_open()) {
-		cout << "Can not open file store." << endl;
+		cout << "!!Can not open file store.!!" << endl;
 		return;
 	}
 	else {
 		ofs << this->m_album.size() << endl;
 		for (int i = 0; i < this->m_album.size(); i++) {
 			ofs << this->m_album[i].getID() << endl;
-			ofs << this->importItem[i] << endl;
-			ofs << this->exportItem[i] << endl;
+			ofs << this->m_import[i] << endl;
+			ofs << this->m_export[i] << endl;
 		}
 		ofs.close();
 	}
@@ -522,9 +533,9 @@ void Store::overwriteStore_txt() {
 
 void Store::edit() {
 	string id;
-	cout << "Enter album ID: ";
-	getline(cin, id);
 	cin.ignore();
+	cout << "__Enter album ID: ";
+	getline(cin, id);
 	int i;
 	for (i = 0; i < this->m_album.size(); i++) {
 		if (stoi(id) == m_album[i].getID()) {
@@ -533,7 +544,7 @@ void Store::edit() {
 			cout << "2> Edit album's price.\n";
 			cout << "3> Edit album's release date.\n";
 			cout << "4> Exit.\n";
-			cout << "\nEnter your choice: ";
+			cout << "\n__Enter your choice: ";
 			cin >> choice;
 			while (choice <= 0 || choice >= 5) {
 				cout << "Invalid!!\n";
@@ -542,27 +553,28 @@ void Store::edit() {
 			}
 			if (choice == 1) {
 				string name;
-				cout << "Enter new name of album: ";
+				cin.ignore();
+				cout << "__Enter new name of album: ";
 				getline(cin, name);
 				this->m_album[i].editAlbumName(name);
 			}
 			else if (choice == 2) {
 				int price;
-				cout << "Enter new price of album: ";
+				cout << "__Enter new price of album: ";
 				cin >> price;
 				this->m_album[i].editPrice(price);
 			}
 			else if (choice == 3) {
 				string date;
-				cout << "Enter new release date(DD/MM/YYYY): ";
+				cin.ignore();
+				cout << "__Enter new release date(DD/MM/YYYY): ";
 				getline(cin, date);
 				this->m_album[i].editReleaseDate(date);
 			}
 			this->m_album[i].albumOverwrite_Info();
 			break;
 		}
-			
 	}
 	if (i >= this->m_album.size())
-		cout << "ID not found.\n";
+		cout << "!!ID not found.!!\n";
 }

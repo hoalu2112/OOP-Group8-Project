@@ -60,6 +60,7 @@ public:
 	void editAlbumName(string name);
 	void editReleaseDate(string date);
 	void albumOverwrite_Info();
+	void print_short_info();
 	
 };
 
@@ -81,6 +82,14 @@ public:
 	int calcItemSold();
 	int totalExport();
 	vector<Album> get_album() { return this->m_album; }
+	Album getAlbum(int i) { return this->m_album[i]; }
+	int getExport(int i) { return this->m_export[i]; }
+	int getLeavings(int i) { 
+		if (this->m_import[i] >= this->m_export[i])
+			return this->m_import[i] - this->m_export[i];
+		else
+			return 0;
+	}
 	void overwriteStore_txt();
 	void edit();
 };

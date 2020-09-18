@@ -571,10 +571,21 @@ void Store::edit() {
 				getline(cin, date);
 				this->m_album[i].editReleaseDate(date);
 			}
+
 			this->m_album[i].albumOverwrite_Info();
+			this->m_album[i].print_short_info();
 			break;
 		}
 	}
 	if (i >= this->m_album.size())
 		cout << "!!ID not found.!!\n";
+}
+
+void Album::print_short_info() {
+	cout << "___________________________INFO OF THE ALBUM___________________________" << endl;
+	cout << "ID: " << this->m_id << endl;
+	cout << "Album's name: " << this->m_albumName << endl;
+	cout << "Tokens: " << this->m_price << endl;
+	cout << "Date release: " << this->m_release << endl;
+	cout << "Rate: " << this->m_totalPoint / this->m_rateCounts << endl << endl;
 }

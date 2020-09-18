@@ -9,8 +9,8 @@
 
 int main() {
 	Store store;
-	vector<Manager> manager;
-	makeListofManagers(manager);
+	Manager manager("hoalu2112");
+	//makeListofManagers(manager);
 	vector <Customer> customer;
 	makeListOfCustomers(customer);
 GOTO:

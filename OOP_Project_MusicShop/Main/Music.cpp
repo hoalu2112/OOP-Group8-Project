@@ -524,9 +524,12 @@ void Store::overwriteStore_txt() {
 
 void Store::edit() {
 	string id;
+	int choice;
 	cin.ignore();
-	cout << "__Enter album ID: ";
-	getline(cin, id);
+	printListOfAlbums(*this);
+	cout << "__Enter album's order: ";
+	cin >> choice;
+	id = to_string(this->get_album()[choice - 1].getID());
 	int i;
 	for (i = 0; i < this->m_album.size(); i++) {
 		if (stoi(id) == m_album[i].getID()) {
@@ -544,28 +547,43 @@ void Store::edit() {
 			}
 			if (choice == 1) {
 				string name;
+				cout << "Current name: " << this->m_album[i].getName() << endl;
 				cin.ignore();
+
 				cout << "__Enter new name of album: ";
 				getline(cin, name);
 				this->m_album[i].editAlbumName(name);
 			}
 			else if (choice == 2) {
 				int price;
+				cout << "Curret price: " << this->m_album[i].getPrice() << endl;
 				cout << "__Enter new price of album: ";
 				cin >> price;
 				this->m_album[i].editPrice(price);
 			}
 			else if (choice == 3) {
 				string date;
+				cout << "Current release date: " << this->m_album[i].getReleaseDate() << endl;
 				cin.ignore();
 				cout << "__Enter new release date(DD/MM/YYYY): ";
 				getline(cin, date);
 				this->m_album[i].editReleaseDate(date);
 			}
+
 			this->m_album[i].albumOverwrite_Info();
+			this->m_album[i].print_short_info();
 			break;
 		}
 	}
 	if (i >= this->m_album.size())
 		cout << "!!ID not found.!!\n";
+}
+
+void Album::print_short_info() {
+	cout << "___________________________INFO OF THE ALBUM___________________________" << endl;
+	cout << "ID: " << this->m_id << endl;
+	cout << "Album's name: " << this->m_albumName << endl;
+	cout << "Tokens: " << this->m_price << endl;
+	cout << "Date release: " << this->m_release << endl;
+	cout << "Rate: " << this->m_totalPoint / this->m_rateCounts << endl << endl;
 }

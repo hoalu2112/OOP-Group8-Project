@@ -134,18 +134,28 @@ LOOP:
 			cout << sold << " albums have been sold.\n";
 		else
 			cout << sold << " album has been sold.\n";
+		for (int i = 0; i < store.get_album().size(); i++) {
+			if (store.getExport(i) > 0) {
+				store.getAlbum(i).print_short_info();
+			}
+		}
 		goto LOOP;
 	}
 	else if (choice == 2) {
 		int sold = store.totalExport();
-		if (sold > 1)
-			cout << sold << " items have been sold.\n";
-		else
-			cout << sold << " item has been sold.\n";
+		cout << "Total " << sold << " items have been sold.\n";
+		for (int i = 0; i < store.get_album().size(); i++) {
+			store.getAlbum(i).print_short_info();
+			cout << "Total sold: " << store.getExport(i) << " items\n";
+		}
 		goto LOOP;
 	}
 	else if (choice == 3) {
-		cout << store.calcLeavings() << " items left in the store.\n";
+		cout << "Total " << store.calcLeavings() << " items left in the store.\n";
+		for (int i = 0; i < store.get_album().size(); i++) {
+			store.getAlbum(i).print_short_info();
+			cout << store.getLeavings(i) << " items left\n";
+		}
 		goto LOOP;
 	}
 	else if (choice == 4) {
@@ -155,9 +165,12 @@ LOOP:
 	else if (choice == 5) {
 		int items;
 		string id;
+		int choice;
 		cin.ignore();
-		cout << "__Enter album's ID: ";
-		getline(cin, id);
+		printListOfAlbums(store);
+		cout << "__Enter album's order: ";
+		cin >> choice;
+		id = to_string(store.get_album()[choice - 1].getID());
 		cout << "__Enter value to import: ";
 		cin >> items;
 		store.importItem(id,items);

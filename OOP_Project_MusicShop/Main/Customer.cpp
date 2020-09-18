@@ -191,7 +191,7 @@ void Customer::Buy_album(Store& store)
 	m_tokens -= store.cal_price_AlbumI_quality(album_order, quality);
 
 	Date tmp;
-	cout << tmp.toString() << endl;
+	//cout << tmp.toString() << endl;
 	Transaction Tran(store.get_album()[album_order - 1].getID(), tmp, quality, store.cal_price_AlbumI_quality(album_order, quality));
 	m_trans.push_back(Tran);
 	overwriteCustomerName_txt();
@@ -208,7 +208,7 @@ LOOP:
 	cout << "4> View transaction history." << endl; //lich su giao dich.
 	cout << "5> Buy album(s)" << endl; // mua hang.
 	cout << "6> View Best_Rate & Best_Seller:" << endl; // danh gia tot nhat + ban chay nhat.
-	cout << "7> Deposit Tokes." << endl; // nap token vao tai khoan
+	cout << "7> Deposit Tokens." << endl; // nap token vao tai khoan
 	cout << "8> Change password." << endl; // doi mat khau
 	cout << "9> Log out." << endl << endl << endl;// dang xuat.
 

@@ -142,6 +142,62 @@ void Customer::changePasswordCustomer() {
 	
 }
 
+void Customer::Buy_album(Store& store)
+{
+	int album_order;
+	cout << "__Enter album's order: ";
+	cin >> album_order;
+
+	while (album_order < 0 || album_order > store.get_album().size()) {
+		cout << "Invalid!!" << endl;
+		cout << "__Enter album's order: ";
+		cin >> album_order;
+	}
+	int quality;
+	cout << "Number of that item in the store:" << store.Cal_albumI_leaveing(album_order)<<endl;
+	cout << "__Enter quality you wanna buy: ";
+	cin >> quality;
+	bool flag = true;
+	while (flag) {
+		if(quality > store.Cal_albumI_leaveing(album_order)){
+		cout << "Invalid!!" << endl;
+		cout << "Shop Dont have enough item" << endl;
+		cout << "__Enter quality you wanna buy: ";
+		cin >> quality;
+		}
+		else
+			if(m_tokens< store.cal_price_AlbumI_quality(album_order,quality))
+			{
+				int choice;
+				cout << "Invalid!!" << endl;
+				cout << "You Dont have enough token " << endl;
+				cout << "Do you wanna get some more token !" << endl;
+				cout << "1> Yes." << endl;
+				cout << "2> No." << endl;
+				cout << "_Enter:";
+				cin >> choice;
+				if (choice == 1);
+				///chua viet ty nho them vo nha ~~ loi tui
+				/// 
+				else
+					return;
+			}
+			else {
+				flag = false;
+			}
+		
+	}
+	store.Buy_AlbumI(album_order, quality);
+	m_tokens -= store.cal_price_AlbumI_quality(album_order, quality);
+
+	Date tmp;
+	cout << tmp.toString() << endl;
+	Transaction Tran(store.get_album()[album_order - 1].getID(), tmp, quality, store.cal_price_AlbumI_quality(album_order, quality));
+	m_trans.push_back(Tran);
+	overwriteCustomerName_txt();
+	store.overwriteStore_txt();
+}
+
 void Customer::Menu(Store& store)
 {
 LOOP:
@@ -150,17 +206,16 @@ LOOP:
 	cout << "2> View full list of albums." << endl; // xem full danh sach album.
 	cout << "3> Search albums." << endl; // tim kiem album.
 	cout << "4> View transaction history." << endl; //lich su giao dich.
-	cout << "5> View your cart." << endl; //xem gio hang.
-	cout << "6> Buy album(s)" << endl; // mua hang.
-	cout << "7> View Best_Rate & Best_Seller:" << endl; // danh gia tot nhat + ban chay nhat.
-	cout << "8> Deposit Tokes." << endl; // nap token vao tai khoan
-	cout << "9> Change password." << endl; // doi mat khau
-	cout << "10> Log out." << endl << endl << endl;// dang xuat.
+	cout << "5> Buy album(s)" << endl; // mua hang.
+	cout << "6> View Best_Rate & Best_Seller:" << endl; // danh gia tot nhat + ban chay nhat.
+	cout << "7> Deposit Tokes." << endl; // nap token vao tai khoan
+	cout << "8> Change password." << endl; // doi mat khau
+	cout << "9> Log out." << endl << endl << endl;// dang xuat.
 
 	int customer_choice;
 	cout << "__Enter your choice: ";
 	cin >> customer_choice;
-	while (customer_choice <= 0 || customer_choice > 10) {
+	while (customer_choice <= 0 || customer_choice > 9) {
 		cout << "Invalid!!" << endl;
 		cout << "__Enter your choice: ";
 		cin >> customer_choice;
@@ -181,16 +236,21 @@ LOOP:
 		viewTransactionHistory();
 		goto LOOP;
 	}
-	else if (customer_choice == 7) {
+	else if(customer_choice == 5){
+		printListOfAlbums(store);
+		Buy_album(store);
+		goto LOOP;
+	}
+	else if (customer_choice == 6) {
 		printBestRate_Seller(store);
 		goto LOOP;
 	}
-	else if (customer_choice == 9) {
+	else if (customer_choice == 8) {
 		changePasswordCustomer();
 		overwriteCustomerName_txt();
 		goto LOOP;
 	}
-	else if (customer_choice == 10) {
+	else if (customer_choice == 9) {
 		cout << "You have been log out." << endl;
 		return ;
 	}

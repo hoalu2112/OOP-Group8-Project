@@ -56,7 +56,10 @@ public:
 	int getPrice();
 	
 	int Tel_price() { return m_price; }
-	
+	void editPrice(int price);
+	void editAlbumName(string name);
+	void editReleaseDate(string date);
+	void albumOverwrite_Info();
 	
 };
 
@@ -77,21 +80,23 @@ public:
 	int calcLeavings();
 	int calcItemSold();
 	int totalExport();
+	int Cal_albumI_leaveing(int i) {
+		return (m_import[i - 1] - m_export[i - 1]);
+	}
+	int cal_price_AlbumI_quality(int i, int quality) {
+		return (m_album[i - 1].getPrice() * quality);
+	}
+	void Buy_AlbumI(int i, int quality) {
+		m_export[i - 1] += quality;
+	}
 	vector<Album> get_album() { return this->m_album; }
-};
-
-class Cart {
-protected:
-	vector<Album> m_album;
-public:
-	double total_price();
-	void Buy_ALL();
-	void add();
-	void delete_album();
+	void overwriteStore_txt();
+	void edit();
 };
 
 
-void makeListOfAlbums(vector<Album> &album); // read all file of Album "Info_ID.txt".
+void makeListOfAlbums(vector<Album> &album);
+// read all file of Album "Info_ID.txt".
 
 //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER 
  // customer_choice =2

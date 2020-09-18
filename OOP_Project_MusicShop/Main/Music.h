@@ -96,7 +96,8 @@ public:
 };
 
 
-void makeListOfAlbums(vector<Album> &album); // read all file of Album "Info_ID.txt".
+void makeListOfAlbums(vector<Album> &album);
+// read all file of Album "Info_ID.txt".
 
 //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER //CUSTOMER 
  // customer_choice =2

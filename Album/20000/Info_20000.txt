@@ -1,7 +1,7 @@
 THANH PHO MAU VANG
 ..\..\Album\20000\CO_BEAT.wav
 ..\..\Album\20000\CO_Poster.bmp
-24/12/2020
-25
+25/12/2020
+30
 5
 20

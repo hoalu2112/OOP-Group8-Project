@@ -165,9 +165,12 @@ LOOP:
 	else if (choice == 5) {
 		int items;
 		string id;
+		int choice;
 		cin.ignore();
-		cout << "__Enter album's ID: ";
-		getline(cin, id);
+		printListOfAlbums(store);
+		cout << "__Enter album's order: ";
+		cin >> choice;
+		id = to_string(store.get_album()[choice - 1].getID());
 		cout << "__Enter value to import: ";
 		cin >> items;
 		store.importItem(id,items);

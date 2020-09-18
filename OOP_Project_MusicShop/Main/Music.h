@@ -61,7 +61,8 @@ public:
 	void editReleaseDate(string date);
 	void albumOverwrite_Info();
 	void print_short_info();
-	
+	string getName() { return m_albumName; }
+	string getReleaseDate() { return m_release.toString(); }
 };
 
 class Store {

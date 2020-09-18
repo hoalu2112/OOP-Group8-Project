@@ -28,7 +28,37 @@ GOTO:
 		cin >> choice;
 	}
 	if (choice == 1) {
-		
+		cin.ignore();
+		bool flag = false;
+		string user;
+		string password;
+		int cur;
+		cout << "__Enter your user:";
+		getline(cin, user);
+
+		for (int i = 0; i < manager.size(); i++) {
+			if (manager[i].check_user(user)) {
+				flag = true;
+				cur = i;
+				break;
+			}
+		}
+		if (!flag) {
+			cout << "That user_name doesn't exist." << endl;
+		}
+		else
+		{
+			cout << "__Enter your password:";
+			getline(cin, password);
+			if (manager[cur].check_pass(password)) {
+				manager[cur].menu(store);
+			}
+			else {
+				system("cls");
+				cout << "Wrong password." << endl << endl;
+				goto GOTO;
+			}
+		}
 	}
 	else
 		if (choice == 2) {

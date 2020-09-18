@@ -80,19 +80,18 @@ public:
 	int calcLeavings();
 	int calcItemSold();
 	int totalExport();
+	int Cal_albumI_leaveing(int i) {
+		return (m_import[i - 1] - m_export[i - 1]);
+	}
+	int cal_price_AlbumI_quality(int i, int quality) {
+		return (m_album[i - 1].getPrice() * quality);
+	}
+	void Buy_AlbumI(int i, int quality) {
+		m_export[i - 1] += quality;
+	}
 	vector<Album> get_album() { return this->m_album; }
 	void overwriteStore_txt();
 	void edit();
-};
-
-class Cart {
-protected:
-	vector<Album> m_album;
-public:
-	double total_price();
-	void Buy_ALL();
-	void add();
-	void delete_album();
 };
 
 

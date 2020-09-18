@@ -469,15 +469,6 @@ int Album::getID() {
 int Album::getPrice() {
 	return m_price;
 }
-double Cart::total_price()
-{
-	double result=0;
-	for (int i = 0; i < m_album.size(); i++) {
-		result += m_album[i].Tel_price();
-	}
-	return result;
-}
-
 void Album::editAlbumName(string name) {
 	this->m_albumName = name;
 }

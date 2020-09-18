@@ -7,7 +7,7 @@ Manager::Manager(string username) {
 	ifstream fin;
 	fin.open(ss.str().c_str());
 	if (!fin.is_open()) {
-		cout << "Can not open file!" << endl;
+		cout << "Can not open file" <<ss.str()<< endl;
 		return;
 	}
 	else {

@@ -27,7 +27,7 @@ public:
 	friend void overwriteFileCustomer_txt(vector<Customer> customer); //ghi lai file Customer.TXT neu co chinh sua.
 	void overwriteCustomerName_txt(); //ghi lai file tenkhachhang.TXT neu co chinh sua.
 	void changePasswordCustomer(); // customer co the doi mat khau cua ho.
-	void print();
+	void Buy_album(Store& store);
 	void Menu(Store& store );
 	bool check_user(string user) { return this->m_cusName == user; }
 	bool check_pass(string pass) { return this->m_cusPass == pass; }

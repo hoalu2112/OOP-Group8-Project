@@ -8,8 +8,6 @@
 #include "Music.h"
 using namespace std;
 
-
-
 class Store;
 
 class Customer{

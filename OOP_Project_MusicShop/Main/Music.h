@@ -18,6 +18,7 @@
 #include "Static/bitmap.h"
 using namespace std;
 
+
 class Store;
 
 class Song{

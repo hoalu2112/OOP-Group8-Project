@@ -458,6 +458,10 @@ void albumOption(Store& store) {
 	}
 	else if (album_option == 3) {
 		store.m_album[album_order - 1].rateAlbum();
+		system("cls");
+		cout << ("Thank you for your survey(^ -^)");
+		Sleep(1000);
+		system("cls"); 
 		albumOption(store);
 	}
 }

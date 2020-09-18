@@ -124,10 +124,12 @@ LOOP:
 	cin >> choice;
 
 	while (choice <= 0 || choice >= 9) {
+		system("cls");
 		cout << "Invalid!!\n";
 		cout << "__Enter your choice: ";
 		cin >> choice;
 	}
+	system("cls");
 	if (choice == 1) {
 		int sold = store.calcItemSold();
 		if (sold > 1)

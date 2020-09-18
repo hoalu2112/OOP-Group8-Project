@@ -21,7 +21,7 @@ GOTO:
 	int choice;
 	cout << "__Enter your choice: ";
 	cin >> choice;
-
+	system("cls");
 	while (choice <= 0 || choice >= 4) {
 		cout << "Invalid!!\n";
 		cout << "__Enter your choice: ";
@@ -51,6 +51,7 @@ GOTO:
 			cout << "__Enter your password:";
 			getline(cin, password);
 			if (manager[mana].check_pass(password)) {
+				system("cls");
 				manager[mana].menu(store);
 			}
 			else {
@@ -85,6 +86,7 @@ GOTO:
 				cout << "__Enter your password:";
 				getline(cin, password);
 				if (customer[cur].check_pass(password)) {
+					system("cls");
 					customer[cur].Menu(store);
 				}
 				else {

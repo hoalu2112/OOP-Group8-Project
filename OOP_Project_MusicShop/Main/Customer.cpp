@@ -215,11 +215,13 @@ LOOP:
 	int customer_choice;
 	cout << "__Enter your choice: ";
 	cin >> customer_choice;
+	system("cls");
 	while (customer_choice <= 0 || customer_choice > 9) {
 		cout << "Invalid!!" << endl;
 		cout << "__Enter your choice: ";
 		cin >> customer_choice;
 	}
+	system("cls");
 	if (customer_choice == 1) {
 		cout << "Your Tokens:= "; //username nay la luc ng dung dang nhap, dung username do de thuc hien chuong trinh. ///nho them vo gettoken
 		goto LOOP;

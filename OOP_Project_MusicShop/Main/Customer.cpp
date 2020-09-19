@@ -1,5 +1,12 @@
 #include "Customer.h"
 using namespace std;
+void Customer::Check_Membership()
+{
+	if (this->Total_amount() >= 10)
+		m_flag = 1;
+	else
+		m_flag = 0;
+}
 Customer::Customer(string username) {
 	string link_customer = "..\\..\\All_Users\\CUSTOMER\\";
 	stringstream ss;
@@ -67,6 +74,28 @@ void makeListOfCustomers(vector<Customer> &customer) {
 			customer.push_back(temp_customer);
 		}
 		fin.close();
+	}
+}
+
+void MakeListofCode(vector<Giftcode>& code) {
+	ifstream input;
+	input.open("secret\\giftcode.txt");
+	if (!input.is_open())
+		cout << "cant open file giftcode.txt";
+	else {
+		int n = 0;
+		input >> n;
+		input.ignore();
+		double token;
+		string tmp;
+		for (int i = 0; i < n; i++) {
+			getline(input, tmp);
+			input >> token;
+			input.ignore();
+			Giftcode a(tmp, token);
+			code.push_back(a); 
+		}
+		input.close();
 	}
 }
 
@@ -144,6 +173,7 @@ void Customer::changePasswordCustomer() {
 
 void Customer::Buy_album(Store& store)
 {
+	double price;
 	int album_order;
 	cout << "__Enter album's order: ";
 	cin >> album_order;
@@ -159,6 +189,11 @@ void Customer::Buy_album(Store& store)
 	cin >> quality;
 	bool flag = true;
 	while (flag) {
+		price = store.cal_price_AlbumI_quality(album_order, quality);
+		//if the customer have membership, they'll be discount 20%
+		if (m_flag) {
+			price *= 0.8;
+		}
 		if(quality > store.Cal_albumI_leaveing(album_order)){
 		cout << "Invalid!!" << endl;
 		cout << "Shop Dont have enough item" << endl;
@@ -166,7 +201,7 @@ void Customer::Buy_album(Store& store)
 		cin >> quality;
 		}
 		else
-			if(m_tokens< store.cal_price_AlbumI_quality(album_order,quality))
+			if(m_tokens< price)
 			{
 				int choice;
 				cout << "Invalid!!" << endl;
@@ -188,7 +223,7 @@ void Customer::Buy_album(Store& store)
 		
 	}
 	store.Buy_AlbumI(album_order, quality);
-	m_tokens -= store.cal_price_AlbumI_quality(album_order, quality);
+	m_tokens -= price;
 
 	Date tmp;
 	//cout << tmp.toString() << endl;
@@ -223,7 +258,7 @@ LOOP:
 	}
 	system("cls");
 	if (customer_choice == 1) {
-		cout << "Your Tokens:= "; //username nay la luc ng dung dang nhap, dung username do de thuc hien chuong trinh. ///nho them vo gettoken
+		cout << "Your Tokens:= "<<getTokens(); //username nay la luc ng dung dang nhap, dung username do de thuc hien chuong trinh. ///nho them vo gettoken
 		goto LOOP;
 	}
 	else if (customer_choice == 2) {

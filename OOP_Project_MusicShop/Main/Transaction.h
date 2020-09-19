@@ -23,6 +23,7 @@ public:
 	string toString();
 	Transaction& stringToTransaction(string transaction);
 	void printHistoryTransaction();
+	int GetAmount() { return amount; }
 };
 
 #endif

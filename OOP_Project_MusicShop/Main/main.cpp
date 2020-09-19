@@ -2,17 +2,26 @@
 #include "Customer.h"
 #include "Transaction.h"
 #include "Manager.h"
-
+#include <iomanip>
 
 
 ////CUSTOMER.
 
 int main() {
 	Store store;
+	vector <Giftcode> Code;
+	MakeListofCode(Code);
+	cout << fixed<< setprecision(2)<<Code[0].Get_token()<<" "<< Code[0].get_code();
+	/*for (int i = 0; i < Code.size(); i++) {
+		cout << (int)Code[i].Get_token() << endl;
+	}*/
 	vector<Manager> manager;
 	makeListofManagers(manager);
 	vector <Customer> customer;
 	makeListOfCustomers(customer);
+	for (int i = 0; i < customer.size(); i++) {
+		customer[i].Check_Membership();
+	}
 GOTO:
 	cout << "___MENU___" << endl;
 	cout << "1> Manager.\n";

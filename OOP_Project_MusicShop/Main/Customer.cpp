@@ -258,7 +258,7 @@ LOOP:
 	}
 	system("cls");
 	if (customer_choice == 1) {
-		cout << "Your Tokens:= " << getTokens() << endl; //username nay la luc ng dung dang nhap, dung username do de thuc hien chuong trinh. ///nho them vo gettoken
+		cout << "Your Tokens:= " << getTokens() <<endl ; //username nay la luc ng dung dang nhap, dung username do de thuc hien chuong trinh. ///nho them vo gettoken
 		goto LOOP;
 	}
 	else if (customer_choice == 2) {
@@ -276,7 +276,7 @@ LOOP:
 	else if (customer_choice == 5) {
 		printListOfAlbums(store);
 		Buy_album(store);
-		cout << "Buy album(s) successfully." << endl;
+		cout << " Buy album(s) successfully." << endl;
 		goto LOOP;
 	}
 	else if (customer_choice == 6) {

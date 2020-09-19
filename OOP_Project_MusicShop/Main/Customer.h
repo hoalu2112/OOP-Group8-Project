@@ -11,27 +11,7 @@ using namespace std;
 
 class Store;
 
-class Giftcode {
-private:
-	string m_code;
-	double m_token=0;
-public:
-	Giftcode(string CODE, double Token) {
-		//cout << (int)m_token << endl;
-		this->m_code = CODE;
-		this->m_token = Token;
-		cout << m_token << " " << Token << endl;
-	}
-	Giftcode(const Giftcode &another) {
-		this->m_code = another.m_code;
-		this->m_token = another.m_token;
-	}
-	bool check(string code) { return m_code == code; }
-	double Get_token() { return this->m_token; }
-	string get_code() { return m_code; }
-};
 
-void MakeListofCode(vector<Giftcode>& code);
 class Customer{
 protected:
 	string m_cusName; //ten dang nhap.
@@ -59,6 +39,7 @@ public:
 	void Menu(Store& store );
 	bool check_user(string user) { return this->m_cusName == user; }
 	bool check_pass(string pass) { return this->m_cusPass == pass; }
+	void Deposit_Token(Store& store);
 };
 void makeListOfCustomers(vector<Customer>& customer); // doc file Customer.txt --> luu het cac thong tin cua tung customer vao vector.
 

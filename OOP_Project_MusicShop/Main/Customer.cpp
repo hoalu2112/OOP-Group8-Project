@@ -282,6 +282,11 @@ LOOP:
 		printBestRate_Seller(store);
 		goto LOOP;
 	}
+	else if (customer_choice == 7) {
+		Deposit_Token(store);
+		overwriteCustomerName_txt();
+		goto LOOP;
+	}
 	else if (customer_choice == 8) {
 		changePasswordCustomer();
 		overwriteCustomerName_txt();
@@ -291,4 +296,20 @@ LOOP:
 		cout << "You have been log out." << endl;
 		return ;
 	}
+}
+
+void Customer::Deposit_Token(Store& store)
+{
+	cin.ignore();
+	string g_code;
+	cout << "Input Gift Code:";
+	getline(cin, g_code);
+	for (int i = 0; i < store.Code.size(); i++) {
+		if (store.Code[i].check(g_code)) {
+			m_tokens += store.Code[i].Get_token();
+			cout << "Deposit successful\n";
+			return;
+		}
+	}
+	cout<<"Your Code is Invalid!!\n";
 }

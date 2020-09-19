@@ -3,6 +3,7 @@
 
 
 Store::Store() {
+	MakeListofCode(Code);
 	ifstream fin;
 	fin.open("..\\..\\Store.txt");
 	if (!fin.is_open()) {

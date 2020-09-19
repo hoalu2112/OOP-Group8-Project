@@ -21,6 +21,32 @@ using namespace std;
 
 class Store;
 
+class Giftcode {
+private:
+	string m_code;
+	double* m_token;
+public:
+	Giftcode(string& CODE, double& Token) {
+		//cout << (int)m_token << endl;
+		this->m_code = CODE;
+		this->m_token = new double;
+		*this->m_token = Token;
+	}
+	Giftcode(const Giftcode& another) {
+		this->m_code = another.m_code;
+		this->m_token = new double(*another.m_token);
+	}
+	bool check(string code) { return m_code == code; }
+	double Get_token() {
+		return *m_token;
+	}
+	string get_code() { return m_code; }
+	~Giftcode() {
+		delete this->m_token;
+	}
+};
+
+void MakeListofCode(vector<Giftcode>& code);
 class Song{
 protected:
 	string m_name; //name of the song.
@@ -72,6 +98,7 @@ protected:
 	vector<int> m_import;
 	vector<int> m_export; //sold.
 public: 
+	vector <Giftcode> Code;
 	Store();
 	friend void printBestRate_Seller(const Store& store); // print best seller/ best rate for customer.
 	friend void printListOfAlbums(const Store& store);

@@ -2,7 +2,7 @@
 #include "Customer.h"
 #include "Transaction.h"
 #include "Manager.h"
-
+#include <iomanip>
 
 
 ////CUSTOMER.
@@ -13,6 +13,9 @@ int main() {
 	makeListofManagers(manager);
 	vector <Customer> customer;
 	makeListOfCustomers(customer);
+	for (int i = 0; i < customer.size(); i++) {
+		customer[i].Check_Membership();
+	}
 GOTO:
 	cout << "___MENU___" << endl;
 	cout << "1> Manager.\n";
@@ -21,7 +24,7 @@ GOTO:
 	int choice;
 	cout << "__Enter your choice: ";
 	cin >> choice;
-
+	system("cls");
 	while (choice <= 0 || choice >= 4) {
 		cout << "Invalid!!\n";
 		cout << "__Enter your choice: ";
@@ -51,7 +54,9 @@ GOTO:
 			cout << "__Enter your password:";
 			getline(cin, password);
 			if (manager[mana].check_pass(password)) {
+				system("cls");
 				manager[mana].menu(store);
+				return 0;
 			}
 			else {
 				system("cls");
@@ -85,14 +90,16 @@ GOTO:
 				cout << "__Enter your password:";
 				getline(cin, password);
 				if (customer[cur].check_pass(password)) {
+					system("cls");
 					customer[cur].Menu(store);
+					return 0;
 				}
 				else {
 					system("cls");
 					cout << "Wrong password." << endl << endl;
 					goto GOTO;
 				}
-			}	
+			}
 		}
 		else
 			if (choice == 3) {

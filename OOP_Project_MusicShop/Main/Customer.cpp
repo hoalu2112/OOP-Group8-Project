@@ -1,5 +1,12 @@
 #include "Customer.h"
 using namespace std;
+void Customer::Check_Membership()
+{
+	if (this->Total_amount() >= 10)
+		m_flag = 1;
+	else
+		m_flag = 0;
+}
 Customer::Customer(string username) {
 	string link_customer = "..\\..\\All_Users\\CUSTOMER\\";
 	stringstream ss;
@@ -25,11 +32,11 @@ Customer::Customer(string username) {
 
 		double tokens;
 		fin >> tokens;
-		this->m_tokens  = tokens;
+		this->m_tokens = tokens;
 
 		int number_transaction;
 		fin >> number_transaction;
-		fin.ignore(); 
+		fin.ignore();
 		for (int i = 0; i < number_transaction; i++) {
 			string transaction;
 			getline(fin, transaction);
@@ -42,7 +49,7 @@ Customer::Customer(string username) {
 }
 
 
-void makeListOfCustomers(vector<Customer> &customer) {
+void makeListOfCustomers(vector<Customer>& customer) {
 	ifstream fin;
 	fin.open("..\\..\\All_Users\\CUSTOMER\\Customer_Users.txt");
 	if (!fin.is_open()) {
@@ -70,12 +77,34 @@ void makeListOfCustomers(vector<Customer> &customer) {
 	}
 }
 
-void Customer:: viewTransactionHistory() {
+void MakeListofCode(vector<Giftcode>& code) {
+	ifstream input;
+	input.open("secret\\giftcode.txt");
+	if (!input.is_open())
+		cout << "cant open file giftcode.txt";
+	else {
+		int n = 0;
+		input >> n;
+		input.ignore();
+		double token;
+		string tmp;
+		for (int i = 0; i < n; i++) {
+			getline(input, tmp);
+			input >> token;
+			input.ignore();
+			Giftcode a(tmp, token);
+			code.push_back(a);
+		}
+		input.close();
+	}
+}
+
+void Customer::viewTransactionHistory() {
 	cout << "___________VIEW HISTORY TRANSACTION ___________" << endl << endl;;
-	
-			for (int j = 0; j < this->m_trans.size(); j++) {
-				this->m_trans[j].printHistoryTransaction();
-			}
+
+	for (int j = 0; j < this->m_trans.size(); j++) {
+		this->m_trans[j].printHistoryTransaction();
+	}
 }
 
 void overwriteFileCustomer_txt(vector<Customer> customer) {
@@ -95,7 +124,7 @@ void overwriteFileCustomer_txt(vector<Customer> customer) {
 	}
 }
 
-void Customer:: overwriteCustomerName_txt() {
+void Customer::overwriteCustomerName_txt() {
 	ofstream fout;
 	string link_customer = "..\\..\\All_Users\\CUSTOMER\\";
 	stringstream ss;
@@ -107,43 +136,44 @@ void Customer:: overwriteCustomerName_txt() {
 		return;
 	}
 	else {
-		
-				fout << this->m_cusName << endl;
-				fout << this->m_cusPass << endl;
-				fout << this->m_flag << endl;
-				fout << this->m_tokens << endl;
-				fout << this->m_trans.size() << endl;
-				for (int j = 0; j < this->m_trans.size(); j++) {
-					fout << this->m_trans[j].toString() << endl;
-				}
+
+		fout << this->m_cusName << endl;
+		fout << this->m_cusPass << endl;
+		fout << this->m_flag << endl;
+		fout << this->m_tokens << endl;
+		fout << this->m_trans.size() << endl;
+		for (int j = 0; j < this->m_trans.size(); j++) {
+			fout << this->m_trans[j].toString() << endl;
 		}
-		fout.close();
 	}
+	fout.close();
+}
 void Customer::changePasswordCustomer() {
-	cout << "_____CHANGE YOUR PASSWORD_______" << endl <<endl;
+	cout << "_____CHANGE YOUR PASSWORD_______" << endl << endl;
 	cout << "__Enter your old password: ";
 	string old_pass;
 	getline(cin, old_pass);
 	getline(cin, old_pass);
-	
-		while ( !this->check_pass(old_pass)) {
-			cout << this->m_cusPass << endl;
-			cout << "Old Password Is Incorrect!!" << endl;
-			cout << "__Enter your old password: ";
-			getline(cin, old_pass);
 
-		}
-		cout << "__Enter your new password: " << endl;
-		string new_pass;
-		getline(cin, new_pass);
-		this->m_cusPass = new_pass;
-		cout << "Your password has been changed!" << endl;
-		return;
-	
+	while (!this->check_pass(old_pass)) {
+		cout << this->m_cusPass << endl;
+		cout << "Old Password Is Incorrect!!" << endl;
+		cout << "__Enter your old password: ";
+		getline(cin, old_pass);
+
+	}
+	cout << "__Enter your new password: " << endl;
+	string new_pass;
+	getline(cin, new_pass);
+	this->m_cusPass = new_pass;
+	cout << "Your password has been changed!" << endl;
+	return;
+
 }
 
 void Customer::Buy_album(Store& store)
 {
+	double price;
 	int album_order;
 	cout << "__Enter album's order: ";
 	cin >> album_order;
@@ -154,19 +184,24 @@ void Customer::Buy_album(Store& store)
 		cin >> album_order;
 	}
 	int quality;
-	cout << "Number of that item in the store:" << store.Cal_albumI_leaveing(album_order)<<endl;
+	cout << "Number of that item in the store:" << store.Cal_albumI_leaveing(album_order) << endl;
 	cout << "__Enter quality you wanna buy: ";
 	cin >> quality;
 	bool flag = true;
 	while (flag) {
-		if(quality > store.Cal_albumI_leaveing(album_order)){
-		cout << "Invalid!!" << endl;
-		cout << "Shop Dont have enough item" << endl;
-		cout << "__Enter quality you wanna buy: ";
-		cin >> quality;
+		price = store.cal_price_AlbumI_quality(album_order, quality);
+		//if the customer have membership, they'll be discount 20%
+		if (m_flag) {
+			price *= 0.8;
+		}
+		if (quality > store.Cal_albumI_leaveing(album_order)) {
+			cout << "Invalid!!" << endl;
+			cout << "Shop Dont have enough item" << endl;
+			cout << "__Enter quality you wanna buy: ";
+			cin >> quality;
 		}
 		else
-			if(m_tokens< store.cal_price_AlbumI_quality(album_order,quality))
+			if (m_tokens < price)
 			{
 				int choice;
 				cout << "Invalid!!" << endl;
@@ -185,10 +220,10 @@ void Customer::Buy_album(Store& store)
 			else {
 				flag = false;
 			}
-		
+
 	}
 	store.Buy_AlbumI(album_order, quality);
-	m_tokens -= store.cal_price_AlbumI_quality(album_order, quality);
+	m_tokens -= price;
 
 	Date tmp;
 	//cout << tmp.toString() << endl;
@@ -215,13 +250,15 @@ LOOP:
 	int customer_choice;
 	cout << "__Enter your choice: ";
 	cin >> customer_choice;
+	system("cls");
 	while (customer_choice <= 0 || customer_choice > 9) {
 		cout << "Invalid!!" << endl;
 		cout << "__Enter your choice: ";
 		cin >> customer_choice;
 	}
+	system("cls");
 	if (customer_choice == 1) {
-		cout << "Your Tokens:= "; //username nay la luc ng dung dang nhap, dung username do de thuc hien chuong trinh. ///nho them vo gettoken
+		cout << "Your Tokens:= " << getTokens() << endl; //username nay la luc ng dung dang nhap, dung username do de thuc hien chuong trinh. ///nho them vo gettoken
 		goto LOOP;
 	}
 	else if (customer_choice == 2) {
@@ -236,13 +273,19 @@ LOOP:
 		viewTransactionHistory();
 		goto LOOP;
 	}
-	else if(customer_choice == 5){
+	else if (customer_choice == 5) {
 		printListOfAlbums(store);
 		Buy_album(store);
+		cout << "Buy album(s) successfully." << endl;
 		goto LOOP;
 	}
 	else if (customer_choice == 6) {
 		printBestRate_Seller(store);
+		goto LOOP;
+	}
+	else if (customer_choice == 7) {
+		Deposit_Token(store);
+		overwriteCustomerName_txt();
 		goto LOOP;
 	}
 	else if (customer_choice == 8) {
@@ -252,6 +295,22 @@ LOOP:
 	}
 	else if (customer_choice == 9) {
 		cout << "You have been log out." << endl;
-		return ;
+		return;
 	}
+}
+
+void Customer::Deposit_Token(Store& store)
+{
+	cin.ignore();
+	string g_code;
+	cout << "Input Gift Code:";
+	getline(cin, g_code);
+	for (int i = 0; i < store.Code.size(); i++) {
+		if (store.Code[i].check(g_code)) {
+			m_tokens += store.Code[i].Get_token();
+			cout << "Deposit successful\n";
+			return;
+		}
+	}
+	cout << "Your Code is Invalid!!\n";
 }

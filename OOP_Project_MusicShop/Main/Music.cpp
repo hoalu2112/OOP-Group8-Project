@@ -3,6 +3,7 @@
 
 
 Store::Store() {
+	MakeListofCode(Code);
 	ifstream fin;
 	fin.open("..\\..\\Store.txt");
 	if (!fin.is_open()) {
@@ -47,7 +48,7 @@ vector<Song> Song::readFile(int id) {
 		int song_numbers;
 		fin >> song_numbers;
 		fin.ignore();
-		
+
 		for (int i = 0; i < song_numbers; i++) {
 			string name_song;
 			getline(fin, name_song);
@@ -96,7 +97,7 @@ void Song::printInfoSong() {
 Album::Album(int id) {
 	string link_album = "..\\..\\Album\\";
 	stringstream ss;
-	ss << link_album << id <<"\\Info_" << id << ".txt";
+	ss << link_album << id << "\\Info_" << id << ".txt";
 
 	ifstream fin;
 	fin.open(ss.str().c_str());
@@ -254,7 +255,7 @@ void searchAlbum(Store& store) {
 	for (int i = 0; i < store.m_album.size(); i++) {
 
 		const char* name = strstr(search.c_str(), store.m_album[i].m_albumName.c_str()); //search by name.
-		 
+
 		const char* release_date = strstr(search.c_str(), store.m_album[i].m_release.toString().c_str());//search by release date.
 
 		//search by price.
@@ -275,7 +276,7 @@ void searchAlbum(Store& store) {
 			count++;
 		}
 	}
-	if(count == store.m_album.size())
+	if (count == store.m_album.size())
 		cout << "(-_-) Can't find your album." << endl;
 	return;
 
@@ -365,7 +366,7 @@ int Store::calcLeavings()
 {
 	int leavings = 0;
 	for (int i = 0; i < m_album.size(); i++) {
-		leavings = m_import[i] - m_export[i];
+		leavings += m_import[i] - m_export[i];
 	}
 	return leavings;
 }
@@ -458,6 +459,10 @@ void albumOption(Store& store) {
 	}
 	else if (album_option == 3) {
 		store.m_album[album_order - 1].rateAlbum();
+		system("cls");
+		cout << ("Thank you for your survey(^ -^)");
+		Sleep(1000);
+		system("cls");
 		albumOption(store);
 	}
 }

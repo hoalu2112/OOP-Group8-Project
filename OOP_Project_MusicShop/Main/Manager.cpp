@@ -7,7 +7,7 @@ Manager::Manager(string username) {
 	ifstream fin;
 	fin.open(ss.str().c_str());
 	if (!fin.is_open()) {
-		cout << "Can not open file" <<ss.str()<< endl;
+		cout << "Can not open file" << ss.str() << endl;
 		return;
 	}
 	else {
@@ -124,10 +124,12 @@ LOOP:
 	cin >> choice;
 
 	while (choice <= 0 || choice >= 9) {
+		system("cls");
 		cout << "Invalid!!\n";
 		cout << "__Enter your choice: ";
 		cin >> choice;
 	}
+	system("cls");
 	if (choice == 1) {
 		int sold = store.calcItemSold();
 		if (sold > 1)
@@ -173,7 +175,7 @@ LOOP:
 		id = to_string(store.get_album()[choice - 1].getID());
 		cout << "__Enter value to import: ";
 		cin >> items;
-		store.importItem(id,items);
+		store.importItem(id, items);
 		goto LOOP;
 	}
 	else if (choice == 6) {
